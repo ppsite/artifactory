@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span2"></div>
+        <div class="span8">
+          <div class="row">
+            <div class="span12">
+              <div class="row">
+                <div class="col-md-4">
+                  <img
+                    alt="140x140"
+                    src="https://media.jfrog.com/wp-content/uploads/2021/12/29113553/jfrog-logo-2022.svg"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <h1>Artifactory 巡检报告</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span12">
+              <h3 class="text-success">企业证书</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>证书类型</th>
+                    <th>过期时间</th>
+                    <th>授权对象</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{data["get_system_license"]["type"]}}</td>
+                    <td>{{data["get_system_license"]["type"]}}</td>
+                    <td>{{data["get_system_license"]["type"]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span12">
+              <h3 class="text-success">本地缓存</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>缓存路径</th>
+                    <th>缓存大小</th>
+                    <th>剩余空间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="warning">
+                    <td>{{data["get_storage_info"]["fileStoreSummary"]["storageDirectory"]}}</td>
+                    <td>{{data["get_storage_info"]["fileStoreSummary"]["totalSpace"]}}</td>
+                    <td>{{data["get_storage_info"]["fileStoreSummary"]["freeSpace"]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span12">
+              <h3 class="text-success">仓库信息</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>仓库名称</th>
+                    <th>仓库分类</th>
+                    <th>制品类型</th>
+                    <th>文件夹</th>
+                    <th>文件数量</th>
+                    <th>占用空间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for repo in
+                  data["get_storage_info"]["repositoriesSummaryList"] %}
+                  <tr {% if loop.index % 2 == 0 %}class="success"{% endif %}>
+                    <td>{{repo["repoKey"]}}</td>
+                    <td>{{repo["repoType"]}}</td>
+                    <td>{{repo["packageType"]}}</td>
+                    <td>{{repo["foldersCount"]}}</td>
+                    <td>{{repo["filesCount"]}}</td>
+                    <td>{{repo["usedSpace"]}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="span2"></div>
+      </div>
+    </div>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
